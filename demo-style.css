@@ -1,0 +1,62 @@
+.add-entries{
+  margin: 4px;
+  display: inline-block;
+  border: 1px solid #E1E1E1;
+}
+.add-entries input{
+  margin: 0;
+  border: none;
+}
+.entries{
+  display: inline-block;
+}
+.input{
+  display: inline-block;
+}
+.entry{
+  display: inline-block;
+  background: #26A65B;
+  color: #FFFFFF;
+  padding: 0 4px;
+  margin: 4px;
+  line-height: 1em;
+}
+.suggestions{
+  position: fixed;
+  z-index: $z-index-top;
+  background: #FFFFFF;
+  width: $input-width;
+  max-height: 121px;
+  overflow: auto;
+  border: 1px solid #E1E1E1;
+}
+.suggestion ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.suggestion ul li{
+  display: block;
+  padding: 5px;
+}
+.suggestion ul li .active{
+  background: #F2F1EF;
+  cursor: pointer;
+}
+.suggestion ul li + li{
+  border-top: 1px solid #E1E1E1;
+}
+mark{
+  background: none;
+  font-weight: 600;
+}
+
+.icon-delete:before{
+  content: "\2718";
+}
+.icon{
+  padding: 0;
+  color: #FFFFFF;
+  background: none;
+  border: none;
+}
