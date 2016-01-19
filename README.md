@@ -35,7 +35,6 @@ const mapStateToProps = state => {
 export class Example extends React.Component {
   constructor(props) {
     super(props);
-  }ar();
   }
   render() {
     return (
