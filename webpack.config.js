@@ -7,6 +7,10 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM'
+  },
   output: {
     path: './',
     filename: 'react-redux-entry-input.js',
