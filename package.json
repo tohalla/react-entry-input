@@ -5,6 +5,7 @@
   "main": "react-redux-entry-input.js",
   "scripts": {
     "build": "webpack  --progress --colors",
+    "prepublish": "npm run build",
     "prebuild": "npm run lint",
     "lint": "eslint ./src/*.jsx ./src/*.js"
   },
