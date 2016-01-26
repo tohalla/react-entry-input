@@ -8,6 +8,7 @@ export class Suggestions extends React.Component {
     handleClick: React.PropTypes.func,
     handleHover: React.PropTypes.func.isRequired,
     handleOut: React.PropTypes.func.isRequired,
+    idVariable: React.PropTypes.string,
     minQueryLength: React.PropTypes.number,
     nameVariable: React.PropTypes.string,
     query: React.PropTypes.string,
@@ -16,6 +17,7 @@ export class Suggestions extends React.Component {
   static defaultProps = {
     className: 'suggestions',
     displaySuggestions: true,
+    idVariable: 'id',
     nameVariable: 'name'
   };
   constructor(props, context) {
@@ -26,7 +28,7 @@ export class Suggestions extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.suggestions && nextProps.suggestions.size > 0) {
       nextProps.suggestions.map(item => {
-        this.hoverListeners[item.get('id')] = () => {
+        this.hoverListeners[item.get(this.props.idVariable)] = () => {
           return nextProps.handleHover(item, false);
         };
       });
@@ -44,7 +46,7 @@ export class Suggestions extends React.Component {
         }
       ).first();
       if (suggestion) {
-        this.hoverListeners[suggestion.get('id')]();
+        this.hoverListeners[suggestion.get(this.props.idVariable)]();
       }
     }
   }
@@ -74,7 +76,9 @@ export class Suggestions extends React.Component {
                   key={index}
                   onClick={this.props.handleClick}
                   onMouseOut={this.props.handleOut}
-                  onMouseOver={this.hoverListeners[item.get('id')]}
+                  onMouseOver={
+                    this.hoverListeners[item.get(this.props.idVariable)]
+                  }
               >
                 {this.highlight(item.get(this.props.nameVariable))}
               </li>

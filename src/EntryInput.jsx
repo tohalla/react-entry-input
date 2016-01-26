@@ -8,6 +8,7 @@ export class EntryInput extends React.Component {
     actionAddEntryToState: React.PropTypes.func.isRequired,
     actionRemoveEntryFromState: React.PropTypes.func.isRequired,
     entries: React.PropTypes.object.isRequired,
+    idVariable: React.PropTypes.string,
     minQueryLength: React.PropTypes.number,
     nameVariable: React.PropTypes.string,
     newTagOn: React.PropTypes.array,
@@ -16,6 +17,7 @@ export class EntryInput extends React.Component {
   };
   static defaultProps = {
     minQueryLength: 1,
+    idVariable: 'id',
     nameVariable: 'name',
     newTagOn: [13, 9],
     placeholder: 'entries'
@@ -77,7 +79,7 @@ export class EntryInput extends React.Component {
           this.state.suggestions.size - 1 : selected - 1;
       }
       this.suggestions.hoverListeners[
-        this.state.suggestions.get(location).get('id')
+        this.state.suggestions.get(location).get(this.props.idVariable)
       ](true);
     } else if (event.keyCode === 40) {
       if (this.state.activeSuggestion) {
@@ -85,7 +87,7 @@ export class EntryInput extends React.Component {
           0 : selected + 1;
       }
       this.suggestions.hoverListeners[
-        this.state.suggestions.get(location).get('id')
+        this.state.suggestions.get(location).get(this.props.idVariable)
       ](true);
     } else if (
         this.state.activeSuggestion &&
@@ -157,6 +159,7 @@ export class EntryInput extends React.Component {
                 handleClick={this.handleSuggestionClick}
                 handleHover={this.handleSuggestionHover}
                 handleOut={this.handleSuggestionOut}
+                idVariable={this.props.idVariable}
                 minQueryLength={this.props.minQueryLength}
                 nameVariable={this.props.nameVariable}
                 query={this.state.query}
