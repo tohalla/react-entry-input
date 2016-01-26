@@ -1,6 +1,6 @@
 {
   "name": "react-redux-entry-input",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Input component, in which user can add entries from given immutable set. Provides suggestions as user types.",
   "main": "react-redux-entry-input.js",
   "scripts": {
