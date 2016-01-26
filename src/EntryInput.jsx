@@ -9,6 +9,7 @@ export class EntryInput extends React.Component {
     actionRemoveEntryFromState: React.PropTypes.func.isRequired,
     entries: React.PropTypes.object.isRequired,
     idVariable: React.PropTypes.string,
+    limitEntries: React.PropTypes.int,
     minQueryLength: React.PropTypes.number,
     nameVariable: React.PropTypes.string,
     newTagOn: React.PropTypes.array,
@@ -18,6 +19,7 @@ export class EntryInput extends React.Component {
   static defaultProps = {
     minQueryLength: 1,
     idVariable: 'id',
+    limitEntries: 0,
     nameVariable: 'name',
     newTagOn: [13, 9],
     placeholder: 'entries'
@@ -100,6 +102,12 @@ export class EntryInput extends React.Component {
     event.preventDefault();
   }
   handleAddition(entry) {
+    if (
+      this.props.limitEntries !== 0 &&
+      this.props.limitEntries <= this.props.entries.size
+    ) {
+      return;
+    }
     this.setState({query: ''});
     if (
       Object.keys(this.props.entries).length === 0 ||
@@ -164,7 +172,11 @@ export class EntryInput extends React.Component {
                 nameVariable={this.props.nameVariable}
                 query={this.state.query}
                 ref={this._suggestions}
-                suggestions={this.state.suggestions}
+                suggestions={
+                  this.props.limitEntries !== 0 &&
+                  this.props.limitEntries > this.props.entries.size ?
+                    this.state.suggestions : null
+                }
             />
           </div>
         </div>
