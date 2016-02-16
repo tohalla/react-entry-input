@@ -10,14 +10,15 @@ export class EntryInput extends React.Component {
     deleteClasses: React.PropTypes.string,
     deleteText: React.PropTypes.string,
     entries: React.PropTypes.object.isRequired,
-    hideEntries: React.PropTypes.boolean,
+    hideEntries: React.PropTypes.bool,
     idVariable: React.PropTypes.string,
     limitEntries: React.PropTypes.number,
     minQueryLength: React.PropTypes.number,
     nameVariable: React.PropTypes.string,
     newTagOn: React.PropTypes.array,
     placeholder: React.PropTypes.string,
-    suggestions: React.PropTypes.object.isRequired
+    suggestions: React.PropTypes.object.isRequired,
+    textIfNoEntries: React.PropTypes.string
   };
   static defaultProps = {
     deleteClasses: 'delete-entry',
@@ -159,6 +160,7 @@ export class EntryInput extends React.Component {
                 entries={this.props.entries}
                 handleDelete={this.handleDelete}
                 idVariable={this.props.idVariable}
+                textIfNoEntries={this.props.textIfNoEntries}
             />
           }
           <div className="input">

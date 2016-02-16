@@ -7,7 +7,8 @@ export class Entries extends React.Component {
     entries: React.PropTypes.object,
     handleDelete: React.PropTypes.func,
     idVariable: React.PropTypes.string,
-    nameVariable: React.PropTypes.string
+    nameVariable: React.PropTypes.string,
+    textIfNoEntries: React.PropTypes.string
   };
   static defaultProps = {
     deleteClasses: 'delete-entry',
@@ -24,23 +25,26 @@ export class Entries extends React.Component {
     };
   }
   render() {
-    return this.props.entries && Object.keys(this.props.entries).length !== 0 ?
-    (
-      <div className="entries">
-        {this.props.entries.map(entry => {
-          return (
-            <span className="entry" key={entry.get(this.props.idVariable)}>
-              {entry.get(this.props.nameVariable)}
-              <button
-                  className={this.props.deleteClasses}
-                  onClick={this.handleDelete(entry)}
-              >
-                {this.props.deleteText}
-              </button>
-            </span>
-          );
-        })}
-      </div>
-    ) : null;
+    if (this.props.entries && Object.keys(this.props.entries).length !== 0) {
+      return (
+        <div className="entries">
+          {this.props.entries.map(entry => {
+            return (
+              <span className="entry" key={entry.get(this.props.idVariable)}>
+                {entry.get(this.props.nameVariable)}
+                <button
+                    className={this.props.deleteClasses}
+                    onClick={this.handleDelete(entry)}
+                >
+                  {this.props.deleteText}
+                </button>
+              </span>
+            );
+          })}
+        </div>
+      );
+    }
+    return this.props.textIfNoEntries ?
+      <div className="entries">{this.props.textIfNoEntries}</div> : null;
   }
 }
