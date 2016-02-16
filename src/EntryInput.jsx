@@ -10,6 +10,7 @@ export class EntryInput extends React.Component {
     deleteClasses: React.PropTypes.string,
     deleteText: React.PropTypes.string,
     entries: React.PropTypes.object.isRequired,
+    hideEntries: React.PropTypes.boolean,
     idVariable: React.PropTypes.string,
     limitEntries: React.PropTypes.number,
     minQueryLength: React.PropTypes.number,
@@ -21,6 +22,7 @@ export class EntryInput extends React.Component {
   static defaultProps = {
     deleteClasses: 'delete-entry',
     deleteText: 'x',
+    hideEntries: false,
     minQueryLength: 1,
     idVariable: 'id',
     limitEntries: 0,
@@ -149,14 +151,16 @@ export class EntryInput extends React.Component {
     return (
       <div>
         <div className="add-entries">
-          <Entries
-              className="entries"
-              deleteClasses={this.props.deleteClasses}
-              deleteText={this.props.deleteText}
-              entries={this.props.entries}
-              handleDelete={this.handleDelete}
-              idVariable={this.props.idVariable}
-          />
+          {this.props.hideEntries ? null :
+            <Entries
+                className="entries"
+                deleteClasses={this.props.deleteClasses}
+                deleteText={this.props.deleteText}
+                entries={this.props.entries}
+                handleDelete={this.handleDelete}
+                idVariable={this.props.idVariable}
+            />
+          }
           <div className="input">
             <input
                 onBlur={this.handleBlur}
