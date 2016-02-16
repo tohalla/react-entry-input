@@ -2,12 +2,16 @@ import React from 'react';
 
 export class Entries extends React.Component {
   static propTypes = {
+    deleteClasses: React.PropTypes.string,
+    deleteText: React.PropTypes.string,
     entries: React.PropTypes.object,
     handleDelete: React.PropTypes.func,
     idVariable: React.PropTypes.string,
     nameVariable: React.PropTypes.string
   };
   static defaultProps = {
+    deleteClasses: 'delete-entry',
+    deleteText: 'x',
     idVariable: 'id',
     nameVariable: 'name'
   };
@@ -28,9 +32,11 @@ export class Entries extends React.Component {
             <span className="entry" key={entry.get(this.props.idVariable)}>
               {entry.get(this.props.nameVariable)}
               <button
-                  className="icon-delete icon"
+                  className={this.props.deleteClasses}
                   onClick={this.handleDelete(entry)}
-              />
+              >
+                {this.props.deleteText}
+              </button>
             </span>
           );
         })}

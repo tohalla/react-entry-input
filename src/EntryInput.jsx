@@ -7,6 +7,8 @@ export class EntryInput extends React.Component {
   static propTypes = {
     actionAddEntryToState: React.PropTypes.func.isRequired,
     actionRemoveEntryFromState: React.PropTypes.func.isRequired,
+    deleteClasses: React.PropTypes.string,
+    deleteText: React.PropTypes.string,
     entries: React.PropTypes.object.isRequired,
     idVariable: React.PropTypes.string,
     limitEntries: React.PropTypes.number,
@@ -17,6 +19,8 @@ export class EntryInput extends React.Component {
     suggestions: React.PropTypes.object.isRequired
   };
   static defaultProps = {
+    deleteClasses: 'delete-entry',
+    deleteText: 'x',
     minQueryLength: 1,
     idVariable: 'id',
     limitEntries: 0,
@@ -147,6 +151,8 @@ export class EntryInput extends React.Component {
         <div className="add-entries">
           <Entries
               className="entries"
+              deleteClasses={this.props.deleteClasses}
+              deleteText={this.props.deleteText}
               entries={this.props.entries}
               handleDelete={this.handleDelete}
               idVariable={this.props.idVariable}
