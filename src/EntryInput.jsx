@@ -9,7 +9,7 @@ export class EntryInput extends React.Component {
     actionRemoveEntryFromState: React.PropTypes.func.isRequired,
     entries: React.PropTypes.object.isRequired,
     idVariable: React.PropTypes.string,
-    limitEntries: React.PropTypes.int,
+    limitEntries: React.PropTypes.number,
     minQueryLength: React.PropTypes.number,
     nameVariable: React.PropTypes.string,
     newTagOn: React.PropTypes.array,
@@ -149,6 +149,7 @@ export class EntryInput extends React.Component {
               className="entries"
               entries={this.props.entries}
               handleDelete={this.handleDelete}
+              idVariable={this.props.idVariable}
           />
           <div className="input">
             <input
@@ -158,7 +159,12 @@ export class EntryInput extends React.Component {
                 onKeyDown={this.handleKeyDown}
                 placeholder={this.props.placeholder}
                 ref={this._input}
-                type="text"
+                type={
+                  this.props.limitEntries === 0 ||
+                  !this.props.entries ||
+                  this.props.limitEntries > this.props.entries.size ?
+                    'text' : 'hidden'
+                }
                 value={this.state.query}
             />
             <Suggestions
@@ -173,7 +179,8 @@ export class EntryInput extends React.Component {
                 query={this.state.query}
                 ref={this._suggestions}
                 suggestions={
-                  this.props.limitEntries !== 0 &&
+                  this.props.limitEntries === 0 ||
+                  !this.props.entries ||
                   this.props.limitEntries > this.props.entries.size ?
                     this.state.suggestions : null
                 }

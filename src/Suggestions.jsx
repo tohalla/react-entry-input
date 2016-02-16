@@ -65,7 +65,7 @@ export class Suggestions extends React.Component {
     null : (
       <div className={this.props.className}>
         <ul>
-          {this.props.suggestions.valueSeq().map((item, index) => {
+          {this.props.suggestions.valueSeq().map(item => {
             return (
               <li
                   className={
@@ -73,7 +73,7 @@ export class Suggestions extends React.Component {
                       this.props.activeSuggestion === item ? 'active' :
                       'default'
                   }
-                  key={index}
+                  key={item.get(this.props.idVariable)}
                   onClick={this.props.handleClick}
                   onMouseOut={this.props.handleOut}
                   onMouseOver={

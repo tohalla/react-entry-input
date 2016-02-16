@@ -4,9 +4,11 @@ export class Entries extends React.Component {
   static propTypes = {
     entries: React.PropTypes.object,
     handleDelete: React.PropTypes.func,
+    idVariable: React.PropTypes.string,
     nameVariable: React.PropTypes.string
   };
   static defaultProps = {
+    idVariable: 'id',
     nameVariable: 'name'
   };
   constructor(props, context) {
@@ -22,13 +24,15 @@ export class Entries extends React.Component {
     (
       <div className="entries">
         {this.props.entries.map(entry => {
-          return (<span className="entry" key={entry.get('id')}>
-            {entry.get(this.props.nameVariable)}
-            <button
-                className="icon-delete icon"
-                onClick={this.handleDelete(entry)}
-            />
-          </span>);
+          return (
+            <span className="entry" key={entry.get(this.props.idVariable)}>
+              {entry.get(this.props.nameVariable)}
+              <button
+                  className="icon-delete icon"
+                  onClick={this.handleDelete(entry)}
+              />
+            </span>
+          );
         })}
       </div>
     ) : null;
