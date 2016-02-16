@@ -32,12 +32,14 @@ export class Entries extends React.Component {
             return (
               <span className="entry" key={entry.get(this.props.idVariable)}>
                 {entry.get(this.props.nameVariable)}
-                <button
-                    className={this.props.deleteClasses}
-                    onClick={this.handleDelete(entry)}
-                >
-                  {this.props.deleteText}
-                </button>
+                {this.props.handleDelete ?
+                  <button
+                      className={this.props.deleteClasses}
+                      onClick={this.handleDelete(entry)}
+                  >
+                    {this.props.deleteText}
+                  </button> : null
+              }
               </span>
             );
           })}
