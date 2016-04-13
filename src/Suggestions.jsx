@@ -26,27 +26,29 @@ export class Suggestions extends React.Component {
     this.hoverListeners = {};
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.suggestions && nextProps.suggestions.size > 0) {
-      nextProps.suggestions.map(item => {
-        this.hoverListeners[item.get(this.props.idVariable)] = () => {
-          return nextProps.handleHover(item, false);
-        };
-      });
-    } else {
-      this.hoverListeners = {};
-    }
-    if (
-      nextProps.suggestions &&
-      !nextProps.activeSuggestion
-    ) {
-      const suggestion = nextProps.suggestions.size === 1 ?
-        nextProps.suggestions.first() :
-        nextProps.suggestions.filter(suggestion => {
-          return suggestion.get(nextProps.nameVariable) === nextProps.query;
+    if (this.props.suggestions !== nextProps.suggestions) {
+      if (nextProps.suggestions && nextProps.suggestions.size > 0) {
+        nextProps.suggestions.map(item => {
+          this.hoverListeners[item.get(this.props.idVariable)] = () => {
+            return nextProps.handleHover(item, false);
+          };
+        });
+      } else {
+        this.hoverListeners = {};
+      }
+      if (
+        nextProps.suggestions &&
+        !nextProps.activeSuggestion
+      ) {
+        const suggestion = nextProps.suggestions.size === 1 ?
+          nextProps.suggestions.first() :
+          nextProps.suggestions.filter(suggestion => {
+            return suggestion.get(nextProps.nameVariable) === nextProps.query;
+          }
+        ).first();
+        if (suggestion) {
+          this.hoverListeners[suggestion.get(this.props.idVariable)]();
         }
-      ).first();
-      if (suggestion) {
-        this.hoverListeners[suggestion.get(this.props.idVariable)]();
       }
     }
   }
@@ -65,8 +67,7 @@ export class Suggestions extends React.Component {
     null : (
       <div className={this.props.className}>
         <ul>
-          {this.props.suggestions.valueSeq().map(item => {
-            return (
+          {this.props.suggestions.valueSeq().map(item => (
               <li
                   className={
                     this.props.activeSuggestion &&
@@ -82,8 +83,9 @@ export class Suggestions extends React.Component {
               >
                 {this.highlight(item.get(this.props.nameVariable))}
               </li>
-            );
-          })}
+            )
+          )
+        }
         </ul>
       </div>
     );

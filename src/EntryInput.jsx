@@ -149,7 +149,8 @@ export class EntryInput extends React.Component {
   updateSuggestions() {
     this.setState({suggestions: this.props.suggestions.filter(entry =>
       entry.get(this.props.nameVariable).toLowerCase()
-        .indexOf(this.state.query.toLowerCase()) !== -1
+        .indexOf(this.state.query.toLowerCase()) !== -1 &&
+      !this.props.entries.includes(entry)
     )});
   }
   render() {
