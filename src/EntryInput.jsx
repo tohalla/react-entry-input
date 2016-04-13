@@ -43,8 +43,12 @@ export class EntryInput extends React.Component {
     this.handleSuggestionClick = this.handleSuggestionClick.bind(this);
     this.handleSuggestionHover = this.handleSuggestionHover.bind(this);
     this.handleSuggestionOut = this.handleSuggestionOut.bind(this);
-    this._input = c => this.input = c;
-    this._suggestions = c => this.suggestions = c;
+    this._input = c => {
+      this.input = c;
+    };
+    this._suggestions = c => {
+      this.suggestions = c;
+    };
     this.state = {
       query: '',
       activeSuggestion: null,
@@ -150,54 +154,53 @@ export class EntryInput extends React.Component {
   }
   render() {
     return (
-      <div>
-        <div className="add-entries">
-          {this.props.hideEntries ? null :
-            <Entries
-                className="entries"
-                deleteClasses={this.props.deleteClasses}
-                deleteText={this.props.deleteText}
-                entries={this.props.entries}
-                handleDelete={this.handleDelete}
-                idVariable={this.props.idVariable}
-                textIfNoEntries={this.props.textIfNoEntries}
-            />
-          }
-          <div className="input">
-            <input
-                onBlur={this.handleBlur}
-                onChange={this.handleChange}
-                onFocus={this.handleFocus}
-                onKeyDown={this.handleKeyDown}
-                placeholder={this.props.placeholder}
-                ref={this._input}
-                type={
-                  this.props.limitEntries === 0 ||
-                  !this.props.entries ||
-                  this.props.limitEntries > this.props.entries.size ?
-                    'text' : 'hidden'
-                }
-                value={this.state.query}
-            />
-            <Suggestions
-                activeSuggestion={this.state.activeSuggestion}
-                displaySuggestions={this.state.displaySuggestions}
-                handleClick={this.handleSuggestionClick}
-                handleHover={this.handleSuggestionHover}
-                handleOut={this.handleSuggestionOut}
-                idVariable={this.props.idVariable}
-                minQueryLength={this.props.minQueryLength}
-                nameVariable={this.props.nameVariable}
-                query={this.state.query}
-                ref={this._suggestions}
-                suggestions={
-                  this.props.limitEntries === 0 ||
-                  !this.props.entries ||
-                  this.props.limitEntries > this.props.entries.size ?
-                    this.state.suggestions : null
-                }
-            />
-          </div>
+      <div className="add-entries">
+        {this.props.hideEntries ? null :
+          <Entries
+              className="entries"
+              deleteClasses={this.props.deleteClasses}
+              deleteText={this.props.deleteText}
+              entries={this.props.entries}
+              handleDelete={this.handleDelete}
+              idVariable={this.props.idVariable}
+              nameVariable={this.props.nameVariable}
+              textIfNoEntries={this.props.textIfNoEntries}
+          />
+        }
+        <div className="input">
+          <input
+              onBlur={this.handleBlur}
+              onChange={this.handleChange}
+              onFocus={this.handleFocus}
+              onKeyDown={this.handleKeyDown}
+              placeholder={this.props.placeholder}
+              ref={this._input}
+              type={
+                this.props.limitEntries === 0 ||
+                !this.props.entries ||
+                this.props.limitEntries > this.props.entries.size ?
+                  'text' : 'hidden'
+              }
+              value={this.state.query}
+          />
+          <Suggestions
+              activeSuggestion={this.state.activeSuggestion}
+              displaySuggestions={this.state.displaySuggestions}
+              handleClick={this.handleSuggestionClick}
+              handleHover={this.handleSuggestionHover}
+              handleOut={this.handleSuggestionOut}
+              idVariable={this.props.idVariable}
+              minQueryLength={this.props.minQueryLength}
+              nameVariable={this.props.nameVariable}
+              query={this.state.query}
+              ref={this._suggestions}
+              suggestions={
+                this.props.limitEntries === 0 ||
+                !this.props.entries ||
+                this.props.limitEntries > this.props.entries.size ?
+                  this.state.suggestions : null
+              }
+          />
         </div>
       </div>
     );

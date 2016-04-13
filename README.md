@@ -1,11 +1,6 @@
 # react-enty-input
 Extremely simple react component, in which user can add entries from given immutable set. Provides suggestions as user types.
-
 ![demo](demo.gif)
-
-If you're not using *immutable* and *redux* in your project, see following:
-* https://github.com/olahol/react-tagsinput
-* https://github.com/prakhar1989/react-tags
 
 ## Installation
 ```
