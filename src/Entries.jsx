@@ -36,6 +36,7 @@ export class Entries extends React.Component {
                   <button
                       className={this.props.deleteClasses}
                       onClick={this.handleDelete(entry)}
+                      type="button"
                   >
                     {this.props.deleteText}
                   </button> : null
